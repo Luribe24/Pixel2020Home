@@ -214,7 +214,7 @@ class MudiPixel{
 
             /** Declared DOM Container Btns*/
             let 
-            skuContainer         = document.body.querySelector(`.sku`)// CUSTOM ELEMENT TEXT SKU
+            skuContainer         = document.body.querySelector(`.sku`).innerHMTL// CUSTOM ELEMENT TEXT SKU
 
             /** End process verify  */
             if( this.btnARVerify > 1500) { console.log("%cMudiPixel:\n","color:#820ad1; font-weight:600","SkuNumber was not found ❌"); return false};
