@@ -162,7 +162,6 @@ class MudiPixel{
                         }
                     }
                 }
-                console.log(skuNumber),
                 this.skuNumber = JSON.stringify(arrayList);
             }
             
