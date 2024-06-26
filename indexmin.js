@@ -131,40 +131,40 @@ class MudiPixel{
         };
 
             /** 3.1 Verify interaction with products 3D Experience */
-            verifyproductInteractive3D() {
-                const allProductsCarts = document.body.querySelectorAll('.cart_item');
+           verifyproductInteractive3D() {
+    const allProductsCarts = document.body.querySelectorAll('.product-name');
+    
+    if (allProductsCarts.length === 0) {
+        requestAnimationFrame(this.verifyproductInteractive3D.bind(this));
+        return;
+    }
+
+    let arrayList = [];
+    
+    for (let i = 0; i < allProductsCarts.length; i++) {
+        // Get the image element inside the cart
+        let imgElement = allProductsCarts[i].querySelector('img');
+        
+        if (imgElement) {
+            // Extract SKU from the src attribute
+            let src = imgElement.getAttribute('src');
+           let skuMatch = src.match(/-(\d{2})(\d+)-/); 
+            let productSKU = skuMatch ? skuMatch[1] : null;
+            console.log(productSKU );
+            
+            if (productSKU) {
+                const listProductStorage = JSON.parse(localStorage.getItem('productsMudi')) || [];
                 
-                if (allProductsCarts.length == 0) {
-                    requestAnimationFrame(this.verifyproductInteractive3D.bind(this));
-                    return;
+                const filter = listProductStorage.find(registry => productSKU.trim() === registry.sku.trim());
+                if (filter) {
+                    arrayList.push(filter);
                 }
-            
-                let arrayList = [];
-            
-                for (let i = 0; i < allProductsCarts.length; i++) {
-                    // Get the image element inside the cart
-                    let imgElement = allProductsCarts[i].querySelector('img');
-                    
-                    if (imgElement) {
-                        // Extract SKU from the src attribute
-                        let src = imgElement.getAttribute('src');
-                        let skuMatch = src.match(/\/(\d+)\.jpg/);
-                        let productSKU = skuMatch ? skuMatch[1] : null;
-                        
-                        if (productSKU) {
-                            const listProductStorage = JSON.parse(localStorage.getItem('productsMudi'));
-                            if (!listProductStorage) return;
-                            
-                            const filter = listProductStorage.find(registry => productSKU.trim() == registry.sku.trim());
-                            if (!filter) return;
-            
-                            arrayList.push(filter);
-                        }
-                    }
-                }
-                this.skuNumber = JSON.stringify(arrayList);
             }
-            
+        }
+    }
+    
+    this.skuNumber = JSON.stringify(arrayList);
+}       
         /** 4. Verify container Btns Mudi PDP ✔️ */
         verifyContainerBtnsMudi(){
 
