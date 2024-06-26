@@ -149,7 +149,7 @@ class MudiPixel{
             // Extract SKU from the src attribute
             let src = imgElement.getAttribute('src');
            let skuMatch = src.match(/-(\d{2})(\d+)-/); 
-            let productSKU = skuMatch ? skuMatch[1] : null;
+            let productSKU = skuMatch ? skuMatch[2] : null;
             console.log(productSKU );
             
             if (productSKU) {
